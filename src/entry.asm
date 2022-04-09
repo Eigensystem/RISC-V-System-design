@@ -1,12 +1,13 @@
-    .section .text.entry
-    .global _start
+.section text_entry
+    .globl _start
+
 _start:
-    la sp, boot_stack_top
+    la sp, stack_bottom
     call rust_main
 
-    .section .stack
-    .globl boot_stack
-boot_stack:
-    .space 4096 * 16
-    .globl boot_stack_top
-boot_stack_top:
+.section stack
+    .globl stack_top
+stack_top:
+    space 4096 * 16
+    .globl stack_bottom
+stack_bottom:

@@ -1,15 +1,15 @@
-OUTPUT_ARCH(riscv)
+OUTPUT_ARCH(RISCV)
 ENTRY(_start)
-BASE_ADDRESS = 0x80200000;
+BASE_ADDR = 0x80200000
 
 SECTIONS
 {
-    . = BASE_ADDRESS;
+    . = BASE_ADDR;
     skernel = .;
-    
+
     stext = .;
     .text : {
-        *(.text.entry)
+        *(.text_entry)
         *(.text .text.*)
     }
     . = ALIGN(4K);
@@ -24,11 +24,13 @@ SECTIONS
     erodata = .;
 
     .data : {
-        *(.stack .stack.*);
+        *(.stack)
+        sdata = .;
         *(.data .data.*)
         *(.sdata .sdata.*)
     }
     . = ALIGN(4K);
+    edata = .;
 
     sbss = .;
     .bss : {
@@ -38,9 +40,7 @@ SECTIONS
     . = ALIGN(4K);
     ebss = .;
 
-    ekernel = .;
-
     /DISCARD/ : {
-        *(.eh_frame)
+        *.(eh_frame)
     }
 }
