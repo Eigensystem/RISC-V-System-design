@@ -1,5 +1,3 @@
-use alloc::string;
-
 use crate::sbi::console_putchar;
 use core::fmt::{Write, self};
 

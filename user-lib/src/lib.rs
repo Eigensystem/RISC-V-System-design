@@ -1,8 +1,18 @@
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        let result = 2 + 2;
-        assert_eq!(result, 4);
-    }
+#![feature(linkage)]
+#![no_main]
+#![no_std]
+// use console;
+mod envset; 
+
+#[no_mangle]
+fn _start() {
+    envset::bss_init();
+}
+
+
+
+#[linkage = "weak"]
+#[no_mangle]
+fn main() -> () {
+    // println!("There is not main function, exiting...");
 }
