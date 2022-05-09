@@ -26,12 +26,13 @@ impl KernelStack {
         self.data.as_ptr() as usize + size_of::<KernelStack>() - size_of::<usize>() 
     }
 
-    pub fn push<T>(&mut self, object: T) {
+    pub fn push<T>(&mut self, object: T) -> usize {
         let addr = (self.get_sp() - size_of::<T>()) as *mut T;
         unsafe {
             *addr = object;
         }
         self.sp -= size_of::<T>();
+        self.sp
     }
 }
 
